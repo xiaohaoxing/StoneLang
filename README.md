@@ -1,6 +1,6 @@
-# StoreLang
+# StoneLang
 
-A impletation of store language.
+A impletation of stone language.
 
 ## Introduce
 
