@@ -318,6 +318,7 @@ public class Parser {
                         if (results.size() == 1) {
                             return results.get(0);
                         } else {
+                            System.out.println("New ASTList");
                             return new ASTList(results);
                         }
                     }

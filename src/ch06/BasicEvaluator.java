@@ -23,7 +23,12 @@ public class BasicEvaluator {
         }
 
         public Object eval(Environment env) {
-            throw new StoneException("Cannot eval: " + toString(), this);
+            if (children.size() != 0) {
+                // 尝试兼容一下空语句的情况
+                throw new StoneException("Cannot eval: " + toString(), this);
+            } else {
+                return 0;
+            }
         }
     }
 

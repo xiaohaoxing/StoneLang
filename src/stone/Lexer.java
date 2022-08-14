@@ -177,8 +177,4 @@ public class Lexer {
             return literal;
         }
     }
-
-    public static void main(String[] args) {
-
-    }
 }
