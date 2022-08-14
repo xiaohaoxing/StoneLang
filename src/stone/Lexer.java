@@ -2,6 +2,7 @@ package stone;
 
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +12,7 @@ import java.util.regex.Pattern;
  * @email xiaohaoxing@outlook.com
  */
 public class Lexer {
-    public static String regexPat = "\\s*((//.*)|[0-9]+|(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")";
+    public static String regexPat = "\\s*((//.*)|([0-9]+)|(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")|[A-Z_a-z][A-Z_a-z0-9]*|==|<=|>=|&&|\\|\\||\\p{Punct})?";
     private Pattern pattern = Pattern.compile(regexPat);
     private ArrayList<Token> queue = new ArrayList<>();
     private boolean hasMore;
@@ -24,7 +25,7 @@ public class Lexer {
 
     public Token read() throws ParseException {
         if (fillQueue(0)) {
-            return queue.get(0);
+            return queue.remove(0);
         } else {
             return Token.EOF;
         }
@@ -89,7 +90,7 @@ public class Lexer {
                 } else if (matcher.group(4) != null) {
                     token = new StrToken(lineNum, toStringLiteral(m));
                 } else {
-                    token = IdToken(lineNum, m);
+                    token = new IdToken(lineNum, m);
                 }
                 queue.add(token);
             }
@@ -177,4 +178,7 @@ public class Lexer {
         }
     }
 
+    public static void main(String[] args) {
+
+    }
 }
