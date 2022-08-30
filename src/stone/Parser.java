@@ -3,6 +3,7 @@ package stone;
 import stone.ast.ASTLeaf;
 import stone.ast.ASTList;
 import stone.ast.ASTree;
+import stone.ast.NullStmnt;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -315,11 +316,13 @@ public class Parser {
                     @Override
                     protected ASTree make0(Object arg) throws Exception {
                         List<ASTree> results = (List<ASTree>) arg;
-                        if (results.size() == 1) {
-                            return results.get(0);
-                        } else {
-                            System.out.println("New ASTList");
-                            return new ASTList(results);
+                        switch (results.size()) {
+                            case 0:
+                                return new NullStmnt(results);
+                            case 1:
+                                return results.get(0);
+                            default:
+                                return new ASTList(results);
                         }
                     }
                 };

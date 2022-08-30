@@ -1,6 +1,5 @@
 package stone.ast;
 
-import ch06.BasicEvaluator;
 import ch06.Environment;
 
 import java.util.List;
